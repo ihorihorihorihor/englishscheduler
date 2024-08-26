@@ -163,6 +163,7 @@ $(document).ready(function () {
 
         e.preventDefault();
         $('#submitSuccessMessage').html('');
+        $('#pdfButton').hide();
 
         let level = $('#filterGrammarByProficiencyLevel').val();
 
@@ -200,36 +201,86 @@ $(document).ready(function () {
 
         let total = grammarcopy.length;
         let day = 1;
-
+        let group = $('<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4"></div>');
         do {
-            $('<h4>Day ' + day + '</h4>').appendTo('#submitSuccessMessage');
-            $('<span>Grammar : </span><br/>').appendTo('#submitSuccessMessage');
-            $('<span>' + getGrammarTopic(grammarcopy) + '</span><br/>').appendTo('#submitSuccessMessage');
-            $('<span>' + getGrammarTopic(grammarcopy) + '</span><br/>').appendTo('#submitSuccessMessage');
-            $('<span>' + getGrammarTopic(grammarcopy) + '</span><br/>').appendTo('#submitSuccessMessage');
-            $('<span>Punctuation : </span><br/>').appendTo('#submitSuccessMessage');
             var punctuationtopic = punctuationcopy.pop();
             if (typeof punctuationtopic === 'undefined') {
                 punctuationcopy = punctuation.slice();
                 shuffle(punctuationcopy);
                 punctuationtopic = punctuationcopy.pop();
             }
-            $('<span>' + punctuationtopic + '</span><br/>').appendTo('#submitSuccessMessage');
-            $('<span>Speaking : </span><br/>').appendTo('#submitSuccessMessage');
             var speakingtopic = speakingcopy.pop();
             if (typeof speakingtopic === 'undefined') {
                 speakingcopy = speaking.slice();
                 shuffle(speakingcopy);
                 speakingtopic = speakingcopy.pop();
             }
-            $('<span>Speaking ' + speakingtopic + '</span><hr/>').appendTo('#submitSuccessMessage');
+            var card = $('<div class="card h-100" style="width: 18rem;"></div>');
+            var content = $('<p class="card-text"></p>');
+            content.append('<h5 class="card-title">Grammar :</h5>');
+            content.append('<p>' + getGrammarTopic(grammarcopy) + '</p>');
+            content.append('<p>' + getGrammarTopic(grammarcopy) + '</p>');
+            content.append('<p>' + getGrammarTopic(grammarcopy) + '</p>');
+            content.append('<h5 class="card-title">Punctuation : </h5>');
+            content.append('<p>' + punctuationtopic + '</p>');
+            content.append('<h5 class="card-title">Speaking : </h5>');
+            content.append('<p>' + speakingtopic + '</p>');
+            card.append('<div class="card-header">Day ' + day + '</div>');
+            card.append($('<div class="card-body"></div>').append(content));
+            group.append($('<div class="col col-sm-6 col-md-3"></div>').append(card));
             day++;
             total = grammarcopy.length;
         } while (total > 0);
-        $('<br/>').appendTo('#submitSuccessMessage');
+        $('#submitSuccessMessage').append(group);
+        $('#pdfButton').show();
+
     });
 
+    $('#pdfButton').hide();
 
+    $('#pdfButton').click(function (e) {
+        e.preventDefault();
+        var html = $('#submitSuccessMessage').html();
+        const data = JSON.stringify({
+            source: {
+                html: html
+            },
+            styles: [
+                {url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"}
+            ],
+            pdf: {
+                format: 'A4',
+                scale: 1,
+                printBackground: false,
+                landscape: true
+            },
+            wait: {
+                for : 'navigation',
+                waitUntil: 'load',
+                timeout: 2500
+            }
+        });
+
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.responseType = 'blob';
+        xhr.open('POST', 'https://yakpdf.p.rapidapi.com/pdf/');
+        xhr.setRequestHeader('x-rapidapi-key', '7559e29e78msh15d75ed92515e1fp14557cjsn6d8993bfa56a');
+        xhr.setRequestHeader('x-rapidapi-host', 'yakpdf.p.rapidapi.com');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(data);
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(new Blob([xhr.response], {type: 'application/pdf'}));
+                link.download = "schedule.pdf";
+                link.click();
+            } else {
+                alert("Error. Estatus " + this.status + ".");
+            }
+        };
+    });
 
     function getGrammarTopic(array) {
         var topic = array.pop();

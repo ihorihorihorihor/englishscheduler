@@ -8,35 +8,33 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
-        <header class="container">
-            <div class="navbar navbar-default navbar-fixed-top" style="height:50px; background-color:black; color:white; justify-content:center; align-items:center;">
-                💛💙 Glory to Ukraine 
-            </div>
-        </header>
-
         <div class="container">
-            <h1>The English Master Course: English Grammar, English Speaking</h1>
-            <h2>Create a flexible schedule in one easy click.</h2>
+            <h1>The English Master Course 💛💙</h1>
+            <br/>
+            <h2>Create a schedule in one click.</h2>
+            <br/>
             <form>
-                <label class="form-label" for="filterGrammarByProficiencyLevel">Select your English proficiency level or select "Schedule all" option below.</label>
+                <label class="form-text mb-3" for="filterGrammarByProficiencyLevel">
+                    Select your English proficiency level or select "Schedule all" option below.
+                </label>
                 <div class="input-group mb-3">
-                    
                     <select class="form-select" id="filterGrammarByProficiencyLevel" aria-describedby="submitButton" aria-label="Filter grammar by proficiency level :">
-                            <option value="Elementary">Elementary</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Advanced">Advanced</option>
-                            <option value="All">Schedule all</option>
-                        </select>
-                    
-               
-                    <button class="btn btn-outline-primary" type="button" id="submitButton">Generate!</button>
-                </div>
-    
+                        <option value="Elementary">Elementary</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="All">Schedule all</option>
+                    </select>
+                    <button class="btn btn-primary" type="button" id="submitButton">Generate!</button>
+                </div> 
+
             </form>
+            <br/>
+            <button class="btn btn-primary" type="button" id="pdfButton">Download PDF</button>
+            <br/>
             <div id="submitSuccessMessage">
             </div>
+            <br/>
         </div>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="scheduler.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
