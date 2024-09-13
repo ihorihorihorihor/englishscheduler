@@ -57,7 +57,6 @@ $(document).ready(function () {
         'Section 63: Adverbs:Adverbs of Degree:blue',
         'Section 64: Adverbs:Comparative and Superlative Adverbs:blue',
         'Section 65: Adverbs:Order of Adverbs:red',
-        'Section 66: Distributives/Quantifiers/Pre-determiners:green',
         'Section 67: Distributives/Quantifiers/Pre-determiners:All, half:blue',
         'Section 68: Distributives/Quantifiers/Pre-determiners:Each, Every:blue',
         'Section 69: Distributives/Quantifiers/Pre-determiners:Both, Either, Neither:blue',
@@ -78,7 +77,7 @@ $(document).ready(function () {
         'Section 87: Clauses:Noun Clause:red',
         'Section 88: Clauses:Adjective (Relative) Clause:red',
         'Section 89: Clauses:Adverb Clauses:red',
-        'Section 91: Conjunctions:Conjunctions:green',
+        'Section 91: Conjunctions:Conjunctions - What are they?:green',
         'Section 92: Conjunctions:Coordinating Conjunctions:blue',
         'Section 93: Conjunctions:Subordinate Conjunctions:blue',
         'Section 94: Conjunctions:Compound Conjunctions:red',
@@ -248,7 +247,6 @@ $(document).ready(function () {
         
         // Format JS array to plain text
         schedule.forEach(function (entry, index) {
-            
             let date = new Date();
             date.setDate(date.getDate() + index);
             let year = date.toLocaleString("default", {year: "numeric"});
@@ -257,27 +255,31 @@ $(document).ready(function () {
             let formattedDate = year + "-" + month + "-" + day;
 
             row.CONTENT = `The Master English : Day ${index}`;
-            row.DESCRIPTION = '"'
-                    + `${entry.grammar1}`
-                    + '\r\n'
-                    + `${entry.grammar2}`
-                    + '\r\n'
-                    + `${entry.grammar3} `
-                    + '\r\n'
-                    + `${entry.punctuation} `
-                    + '\r\n'
-                    + `${entry.speaking}`
-                    + '"';
+            row.DESCRIPTION = '"';
+            row.DESCRIPTION = add(row.DESCRIPTION, 'Legend: ✅ - Done ⏳ - In Progress ❌ - Canceled', linebreak);
+            row.DESCRIPTION = add(row.DESCRIPTION, entry.grammar1, linebreak);
+            row.DESCRIPTION = add(row.DESCRIPTION, entry.grammar2, linebreak);
+            row.DESCRIPTION = add(row.DESCRIPTION, entry.grammar3, linebreak);
+            row.DESCRIPTION = add(row.DESCRIPTION, entry.punctuation, linebreak);
+            row.DESCRIPTION = add(row.DESCRIPTION, entry.speaking, '');
+            row.DESCRIPTION += '"';
             row.DESCRIPTION = row.DESCRIPTION.replace(/,/g, ' ');
             row.DATE = formattedDate;
             text += Object.values(row).join(delimiter) + linebreak;
-            
+
         });
 
         // Start CSV file download.
         downloadscv('schedule.csv', text);
     });
-
+    
+    function add(text, value, linebreak) {
+        if (value) {
+            text += value + linebreak;
+        }
+        return text;
+    }
+    
     function downloadscv(filename, text) {
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
