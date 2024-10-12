@@ -93,11 +93,16 @@ $(document).ready(function () {
         'Section 106: Reported Speech 📕:red',
         'Section 108: Fewer vs. Less | Then vs. Than 📕:red',
         'Section 109: There, Their, They&#39;re | To vs. Too vs. Two 📕:red'];
-
-
-
+        
+        //@todo 
+        // Collect all general sections into a separate list on the page? 
+        // Attach refferences to a proper PDF file ?
+        // Merge all PDF files into one PDF?
+        
+        // 'Section 113: English Speaking and Conversation' general section title
+        // 'Section 110: English Writing Section' general section title
+        
     let speaking = [
-        'Section 113: English Speaking and Conversation',
         'Section 114: Introductions in Informal Settings',
         'Section 115: Introductions in Formal Settings',
         'Section 116: Small Talk',
@@ -127,7 +132,6 @@ $(document).ready(function () {
         'Section 140: Telling Time'];
 
     let punctuation = [
-        'Section 110: English Writing Section',
         'Section 111: Four Sentence Types and Structures',
         'Section 112: English Punctuation Marks: Period: 401',
         'Section 112: English Punctuation Marks: Question Marks: 402',
