@@ -260,7 +260,7 @@ $(document).ready(function () {
 
             row.CONTENT = `The Master English : Day ${index}`;
             row.DESCRIPTION = '"';
-            row.DESCRIPTION = add(row.DESCRIPTION, 'Legend: ✅ - Done ⏳ - In Progress ❌ - Canceled', linebreak);
+            row.DESCRIPTION = add(row.DESCRIPTION, 'Legend: ✅ - Done ⏳ - In Progress', linebreak);
             row.DESCRIPTION = add(row.DESCRIPTION, entry.grammar1, linebreak);
             row.DESCRIPTION = add(row.DESCRIPTION, entry.grammar2, linebreak);
             row.DESCRIPTION = add(row.DESCRIPTION, entry.grammar3, linebreak);
