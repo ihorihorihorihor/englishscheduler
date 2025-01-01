@@ -42,7 +42,7 @@ $(document).ready(function () {
         'Section 46: Articles (a, an, the) 📗:green',
         'Section 47: This, That, These, Those 📗:green',
         'Section 49: Adjectives and Adverbs 📗:green',
-        'Section 50: Descriptives Adjectives 📗:green',
+        'Section 50: Descriptive Adjectives 📗:green',
         'Section 51: Proper Adjectives 📗:green',
         'Section 52: Possessive Adjectives 📘:blue',
         'Section 53: Comparative Adjectives 📘:blue',
